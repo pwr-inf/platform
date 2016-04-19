@@ -36,6 +36,30 @@ export default class ChooseAuthPage extends React.Component {
             );
         }
 
+        if (global.window.mm_config.EnableSignUpWithEngine === 'true') {
+            buttons.push(
+                    <a
+                        className='btn btn-custom-login engine btn-full'
+                        key='engine'
+                        href='#'
+                        onClick={
+                            function clickGit(e) {
+                                e.preventDefault();
+                                this.props.updatePage('engine');
+                            }.bind(this)
+                        }
+                    >
+                        <span className='icon'/>
+                        <span>
+                            <FormattedMessage
+                                id='choose_auth_page.engineCreate'
+                                defaultMessage='Create new team with Engine Account'
+                            />
+                        </span>
+                    </a>
+            );
+        }
+
         if (global.window.mm_config.EnableSignUpWithGoogle === 'true') {
             buttons.push(
                     <a

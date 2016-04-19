@@ -33,6 +33,10 @@ export default class TeamSignUp extends React.Component {
             count = count + 1;
         }
 
+        if (global.window.mm_config.EnableSignUpWithEngine === 'true') {
+            count = count + 1;
+        }
+
         if (global.window.mm_config.EnableLdap === 'true') {
             count = count + 1;
         }
@@ -43,6 +47,8 @@ export default class TeamSignUp extends React.Component {
             this.state = {page: 'email'};
         } else if (global.window.mm_config.EnableSignUpWithGitLab === 'true') {
             this.state = {page: 'gitlab'};
+        } else if (global.window.mm_config.EnableSignUpWithEngine === 'true') {
+            this.state = {page: 'engine'}
         } else if (global.window.mm_config.EnableLdap === 'true') {
             this.state = {page: 'ldap'};
         } else {
@@ -189,6 +195,10 @@ export default class TeamSignUp extends React.Component {
         } else if (this.state.page === 'gitlab') {
             signupMethod = (
                 <SSOSignupPage service={Constants.GITLAB_SERVICE}/>
+            );
+        } else if (this.state.page === 'engine') {
+            signupMethod = (
+                <SSOSignupPage service={Constants.ENGINE_SERVICE}/>
             );
         } else if (this.state.page === 'google') {
             signupMethod = (

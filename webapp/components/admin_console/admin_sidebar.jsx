@@ -404,6 +404,18 @@ export default class AdminSidebar extends React.Component {
                                         />
                                     </a>
                                 </li>
+                                <li>
+                                    <a
+                                        href='#'
+                                        className={this.isSelected('engine_settings')}
+                                        onClick={this.handleClick.bind(this, 'engine_settings', null)}
+                                    >
+                                        <FormattedMessage
+                                            id='admin.sidebar.engine'
+                                            defaultMessage='Engine Settings'
+                                        />
+                                    </a>
+                                </li>
                                 {ldapSettings}
                                 {complianceSettings}
                                 <li>

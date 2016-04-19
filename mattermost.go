@@ -27,6 +27,7 @@ import (
 
 	// Plugins
 	_ "github.com/mattermost/platform/model/gitlab"
+	_ "github.com/mattermost/platform/model/engine"
 
 	// Enterprise Deps
 	_ "github.com/dgryski/dgoogauth"

@@ -121,6 +121,15 @@
         "TokenEndpoint": "",
         "UserApiEndpoint": ""
     },
+    "EngineSettings": {
+        "Enable": false,
+        "Secret": "",
+        "Id": "",
+        "Scope": "",
+        "AuthEndpoint": "",
+        "TokenEndpoint": "",
+        "UserApiEndpoint": ""
+    },
     "GoogleSettings": {
         "Enable": false,
         "Secret": "",

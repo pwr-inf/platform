@@ -21,6 +21,7 @@ const (
 
 	SERVICE_GITLAB = "gitlab"
 	SERVICE_GOOGLE = "google"
+	SERVICE_ENGINE = "engine"
 
 	WEBSERVER_MODE_REGULAR  = "regular"
 	WEBSERVER_MODE_GZIP     = "gzip"
@@ -209,6 +210,7 @@ type Config struct {
 	SupportSettings    SupportSettings
 	GitLabSettings     SSOSettings
 	GoogleSettings     SSOSettings
+	EngineSettings     SSOSettings
 	LdapSettings       LdapSettings
 	ComplianceSettings ComplianceSettings
 }
@@ -228,7 +230,10 @@ func (o *Config) GetSSOService(service string) *SSOSettings {
 		return &o.GitLabSettings
 	case SERVICE_GOOGLE:
 		return &o.GoogleSettings
+	case SERVICE_ENGINE:
+		return &o.EngineSettings
 	}
+
 
 	return nil
 }

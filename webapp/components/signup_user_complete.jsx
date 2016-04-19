@@ -362,6 +362,24 @@ class SignupUserComplete extends React.Component {
             );
         }
 
+        if (global.window.mm_config.EnableSignUpWithEngine === 'true') {
+            signupMessage.push(
+                <a
+                    className='btn btn-custom-login engine'
+                    key='engine'
+                    href={'/api/v1/oauth/engine/signup' + window.location.search + '&team=' + encodeURIComponent(this.state.teamName)}
+                >
+                    <span className='icon'/>
+                    <span>
+                        <FormattedMessage
+                            id='signup_user_completed.engine'
+                            defaultMessage='with Engine'
+                        />
+                    </span>
+                </a>
+            );
+        }
+
         if (global.window.mm_config.EnableSignUpWithGoogle === 'true') {
             signupMessage.push(
                 <a

@@ -193,6 +193,7 @@ export default class Login extends React.Component {
         const teamName = currentTeam.name;
         const ldapEnabled = global.window.mm_config.EnableLdap === 'true';
         const gitlabSigninEnabled = global.window.mm_config.EnableSignUpWithGitLab === 'true';
+        const engineSigninEnabled = global.window.mm_config.EnableSignUpWithEngine === 'true';
         const googleSigninEnabled = global.window.mm_config.EnableSignUpWithGoogle === 'true';
         const usernameSigninEnabled = global.window.mm_config.EnableSignInWithUsername === 'true';
         const emailSigninEnabled = global.window.mm_config.EnableSignInWithEmail === 'true';
@@ -210,6 +211,24 @@ export default class Login extends React.Component {
                         <FormattedMessage
                             id='login.gitlab'
                             defaultMessage='with GitLab'
+                        />
+                    </span>
+                </Link>
+            );
+        }
+        
+        if (engineSigninEnabled) {
+            oauthLogins.push(
+                <Link
+                    className='btn btn-custom-login engine'
+                    key='gitlab'
+                    to={'/api/v1/oauth/engine/login?team=' + encodeURIComponent(teamName)}
+                >
+                    <span className='icon'/>
+                    <span>
+                        <FormattedMessage
+                            id='login.engine'
+                            defaultMessage='with Engine'
                         />
                     </span>
                 </Link>

@@ -116,6 +116,24 @@ class SSOSignUpPage extends React.Component {
                     </span>
                 </a>
             );
+        else if (this.props.service === Constants.ENGINE_SERVICE) {
+            button = (
+                <a
+                    className='btn btn-custom-login engine btn-full'
+                    key='engine'
+                    href='#'
+                    onClick={this.handleSubmit}
+                    disabled={disabled}
+                >
+                    <span className='icon'/>
+                    <span>
+                        <FormattedMessage
+                            id='sso_signup.engine'
+                            defaultMessage='Create team with Engine Account'
+                        />
+                    </span>
+                </a>
+            );
         } else if (this.props.service === Constants.GOOGLE_SERVICE) {
             button = (
                 <a

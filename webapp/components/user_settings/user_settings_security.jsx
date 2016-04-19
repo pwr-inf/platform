@@ -417,6 +417,20 @@ class SecurityTab extends React.Component {
                         </div>
                     </div>
                 );
+            } else if (this.props.user.auth_service === Constants.ENGINE_SERVICE) {
+                inputs.push(
+                    <div
+                        key='oauthEmailInfo'
+                        className='form-group'
+                    >
+                        <div className='setting-list__hint'>
+                            <FormattedMessage
+                                id='user.settings.security.passwordEngineCantUpdate'
+                                defaultMessage='Login occurs through Engine. Password cannot be updated.'
+                            />
+                        </div>
+                    </div>
+                );
             } else if (this.props.user.auth_service === Constants.LDAP_SERVICE) {
                 inputs.push(
                     <div
@@ -492,6 +506,13 @@ class SecurityTab extends React.Component {
                 <FormattedMessage
                     id='user.settings.security.loginGitlab'
                     defaultMessage='Login done through Gitlab'
+                />
+            );
+        } else if (this.props.user.auth_service === Constants.ENGINE_SERVICE) {
+            describe = (
+                <FormattedMessage
+                    id='user.settings.security.loginEngine'
+                    defaultMessage='Login done through Engine'
                 />
             );
         } else if (this.props.user.auth_service === Constants.LDAP_SERVICE) {
@@ -570,6 +591,24 @@ class SecurityTab extends React.Component {
                 );
             }
 
+            let engineOption;
+            if (global.window.mm_config.EnableSignUpWithEngine === 'true' && user.auth_service === '') {
+                engineOption = (
+                    <div>
+                        <Link
+                            className='btn btn-primary'
+                            to={'/' + teamName + '/claim/email_to_oauth?email=' + encodeURIComponent(user.email) + '&old_type=' + user.auth_service + '&new_type=' + Constants.ENGINE_SERVICE}
+                        >
+                            <FormattedMessage
+                                id='user.settings.security.switchEngine'
+                                defaultMessage='Switch to using Engine SSO'
+                            />
+                        </Link>
+                        <br/>
+                    </div>
+                );
+            }
+
             let googleOption;
             if (global.window.mm_config.EnableSignUpWithGoogle === 'true' && user.auth_service === '') {
                 googleOption = (
@@ -611,6 +650,7 @@ class SecurityTab extends React.Component {
                 <div key='userSignInOption'>
                    {emailOption}
                    {gitlabOption}
+                   {engineOption}
                    <br/>
                    {ldapOption}
                    {googleOption}
@@ -662,6 +702,15 @@ class SecurityTab extends React.Component {
             );
         }
 
+        if (this.props.user.auth_service === Constants.ENGINE_SERVICE) {
+            describe = (
+                <FormattedMessage
+                    id='user.settings.security.engine'
+                    defaultMessage='Engine SSO'
+                />
+            );
+        }
+
         return (
             <SettingItemMin
                 title={this.props.intl.formatMessage(holders.method)}
@@ -674,6 +723,7 @@ class SecurityTab extends React.Component {
         const passwordSection = this.createPasswordSection();
 
         let numMethods = 0;
+        numMethods = global.window.mm_config.EnableSignUpWithEngine === 'true' ? numMethods + 1 : numMethods;
         numMethods = global.window.mm_config.EnableSignUpWithGitLab === 'true' ? numMethods + 1 : numMethods;
         numMethods = global.window.mm_config.EnableSignUpWithGoogle === 'true' ? numMethods + 1 : numMethods;
         numMethods = global.window.mm_config.EnableLdap === 'true' ? numMethods + 1 : numMethods;

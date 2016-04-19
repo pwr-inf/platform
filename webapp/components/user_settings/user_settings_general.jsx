@@ -394,6 +394,24 @@ class UserSettingsGeneralTab extends React.Component {
                         {helpText}
                     </div>
                 );
+            } else if (this.props.user.auth_service === Constants.ENGINE_SERVICE) {
+                inputs.push(
+                    <div
+                        key='oauthEmailInfo'
+                        className='form-group'
+                    >
+                        <div className='setting-list__hint'>
+                            <FormattedMessage
+                                id='user.settings.general.emailEngineCantUpdate'
+                                defaultMessage='Login occurs through Engine. Email cannot be updated. Email address used for notifications is {email}.'
+                                values={{
+                                    email: this.state.email
+                                }}
+                            />
+                        </div>
+                        {helpText}
+                    </div>
+                );
             } else if (this.props.user.auth_service === Constants.LDAP_SERVICE) {
                 inputs.push(
                     <div
@@ -463,6 +481,16 @@ class UserSettingsGeneralTab extends React.Component {
                     <FormattedMessage
                         id='user.settings.general.loginGitlab'
                         defaultMessage='Login done through GitLab ({email})'
+                        values={{
+                            email: this.state.email
+                        }}
+                    />
+                );
+            } else if (this.props.user.auth_service === Constants.ENGINE_SERVICE) {
+                describe = (
+                    <FormattedMessage
+                        id='user.settings.general.loginEngine'
+                        defaultMessage='Login done through Engine ({email})'
                         values={{
                             email: this.state.email
                         }}

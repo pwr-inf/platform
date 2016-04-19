@@ -236,6 +236,23 @@
                 }
             }
 
+            &.engine {
+                background: #554488;
+
+                &:hover {
+                    background: darken(#554488, 10%);
+                }
+
+                span {
+                    vertical-align: middle;
+                }
+
+                .icon {
+                    /* background-image: url('../images/gitlabLogo.png'); */
+                }
+            }
+
+
             &.google {
                 background: #dd4b39;
 

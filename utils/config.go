@@ -225,6 +225,7 @@ func getClientConfig(c *model.Config) map[string]string {
 	props["FeedbackEmail"] = c.EmailSettings.FeedbackEmail
 
 	props["EnableSignUpWithGitLab"] = strconv.FormatBool(c.GitLabSettings.Enable)
+	props["EnableSignUpWithEngine"] = strconv.FormatBool(c.EngineSettings.Enable)
 	props["EnableSignUpWithGoogle"] = strconv.FormatBool(c.GoogleSettings.Enable)
 
 	props["ShowEmailAddress"] = strconv.FormatBool(c.PrivacySettings.ShowEmailAddress)
