@@ -122,13 +122,13 @@
         "UserApiEndpoint": ""
     },
     "EngineSettings": {
-        "Enable": false,
-        "Secret": "",
-        "Id": "",
-        "Scope": "",
-        "AuthEndpoint": "",
-        "TokenEndpoint": "",
-        "UserApiEndpoint": ""
+        "Enable": true,
+        "Secret": "enginetest",
+        "Id": "mattermost",
+        "Scope": "openid",
+        "AuthEndpoint": "http://sso.datasciencegroup.pl/oauth/authorize",
+        "TokenEndpoint": "http://sso.datasciencegroup.pl/oauth/token",
+        "UserApiEndpoint": "http://sso.datasciencegroup.pl/user"
     },
     "GoogleSettings": {
         "Enable": false,
