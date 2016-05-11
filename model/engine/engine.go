@@ -9,7 +9,6 @@ import (
 	"github.com/mattermost/platform/model"
 	"io"
 	"strconv"
-	"strings"
 )
 
 const (
@@ -29,7 +28,7 @@ type EngineUser struct {
 
 type EngineMessage struct {
 	IsAuthenticated int64 `authenticated`
-	EngineUser `json:principal`
+	User EngineUser `json:principal`
 }
 
 func init() {
@@ -46,7 +45,7 @@ func userFromEngineUser(glu *EngineUser) *model.User {
 
 	user.Username  = model.CleanUsername(username)
 	user.FirstName = glu.Name
-	user.LastName  = glu.Surname 
+	user.LastName  = glu.Surname
 	user.Email = glu.Email
 	user.AuthData = strconv.FormatInt(glu.Id, 10)
 	user.AuthService = USER_AUTH_SERVICE_ENGINE
@@ -54,7 +53,7 @@ func userFromEngineUser(glu *EngineUser) *model.User {
 	return user
 }
 
-func engineUserFromJson(data io.Reader) *EngineUser {
+func engineMessageFromJson(data io.Reader) *EngineMessage {
 	decoder := json.NewDecoder(data)
 	var glu EngineMessage
 	err := decoder.Decode(&glu)
@@ -69,11 +68,11 @@ func (glu *EngineMessage) IsValid() bool {
 	if glu.IsAuthenticated != 1 {
 		return false
 	}
-	if glu.EngineUser.Id == 0 {
+	if glu.User.Id == 0 {
 		return false
 	}
 
-	if len(glu.EngineUser.Email) == 0 {
+	if len(glu.User.Email) == 0 {
 		return false
 	}
 
@@ -91,7 +90,7 @@ func (m *EngineProvider) GetIdentifier() string {
 func (m *EngineProvider) GetUserFromJson(data io.Reader) *model.User {
 	glu := engineUserFromJson(data)
 	if glu.IsValid() {
-		return userFromEngineUser(glu.EngineUser)
+		return userFromEngineUser(glu.User)
 	}
 
 	return &model.User{}
@@ -101,7 +100,7 @@ func (m *EngineProvider) GetAuthDataFromJson(data io.Reader) string {
 	glu := engineUserFromJson(data)
 
 	if glu.IsValid() {
-		return glu.getAuthData()
+		return glu.User.getAuthData()
 	}
 
 	return ""
