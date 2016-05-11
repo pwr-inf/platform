@@ -116,6 +116,7 @@ class SSOSignUpPage extends React.Component {
                     </span>
                 </a>
             );
+        }
         else if (this.props.service === Constants.ENGINE_SERVICE) {
             button = (
                 <a

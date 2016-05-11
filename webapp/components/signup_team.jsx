@@ -48,7 +48,7 @@ export default class TeamSignUp extends React.Component {
         } else if (global.window.mm_config.EnableSignUpWithGitLab === 'true') {
             this.state = {page: 'gitlab'};
         } else if (global.window.mm_config.EnableSignUpWithEngine === 'true') {
-            this.state = {page: 'engine'}
+            this.state = {page: 'engine'};
         } else if (global.window.mm_config.EnableLdap === 'true') {
             this.state = {page: 'ldap'};
         } else {
