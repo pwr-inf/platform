@@ -116,8 +116,7 @@ class SSOSignUpPage extends React.Component {
                     </span>
                 </a>
             );
-        }
-        else if (this.props.service === Constants.ENGINE_SERVICE) {
+        } else if (this.props.service === Constants.ENGINE_SERVICE) {
             button = (
                 <a
                     className='btn btn-custom-login engine btn-full'
