@@ -2042,6 +2042,7 @@ func AuthorizeOAuthUser(service, code, state, redirectUri string) (io.ReadCloser
 	if resp, err := client.Do(req); err != nil {
 		return nil, nil, nil, model.NewLocAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.token_failed.app_error", nil, err.Error())
 	} else {
+                l4g.Debug(resp.Body)
 		ar = model.AccessResponseFromJson(resp.Body)
 		if ar == nil {
 			return nil, nil, nil, model.NewLocAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.bad_response.app_error", nil, "")
@@ -2052,7 +2053,7 @@ func AuthorizeOAuthUser(service, code, state, redirectUri string) (io.ReadCloser
 		return nil, nil, nil, model.NewLocAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.bad_token.app_error", nil, "token_type="+ar.TokenType)
 	}
 */
-        l4g.Debug(resp.Body)
+
         l4g.Debug(ar)
 	if len(ar.AccessToken) == 0 {
 		return nil, nil, nil, model.NewLocAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.missing.app_error", nil, "")
