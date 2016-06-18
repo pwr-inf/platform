@@ -2047,12 +2047,12 @@ func AuthorizeOAuthUser(service, code, state, redirectUri string) (io.ReadCloser
 	}
 
 	if strings.ToLower(ar.TokenType) != model.ACCESS_TOKEN_TYPE {
-		body, _ := ioutil.ReadAll(r.Body); 
+		body, _ := ioutil.ReadAll(resp.Body); 
 		return nil, nil, nil, model.NewLocAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.bad_token.app_error", nil, "token_type="+ar.TokenType+". json: "+ar.ToJson()+" body = "+string(body))
 	}
 
 	if len(ar.AccessToken) == 0 {
-		body, _ := ioutil.ReadAll(r.Body); 
+		body, _ := ioutil.ReadAll(resp.Body); 
 		return nil, nil, nil, model.NewLocAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.missing.app_error", nil, "json: "+ar.ToJson()+" body = "+string(body))
 	}
 
