@@ -2021,8 +2021,8 @@ func AuthorizeOAuthUser(service, code, state, redirectUri string) (io.ReadCloser
 	tchan := Srv.Store.Team().GetByName(teamName)
 
 	p := url.Values{}
-	p.Set("client_id", sso.Id)
-	p.Set("client_secret", sso.Secret)
+	// p.Set("client_id", sso.Id)
+	// p.Set("client_secret", sso.Secret)
 	p.Set("code", code)
 	p.Set("grant_type", model.ACCESS_TOKEN_GRANT_TYPE)
 	p.Set("redirect_uri", redirectUri)
@@ -2035,6 +2035,7 @@ func AuthorizeOAuthUser(service, code, state, redirectUri string) (io.ReadCloser
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Set("Accept", "application/json")
+	req.SetBasicAuth(sso.Id, sso.Secret)
 
 	var ar *model.AccessResponse
 	var body string
