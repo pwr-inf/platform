@@ -64,7 +64,7 @@ func engineUserFromJson(data io.Reader) *EngineUser {
 	}
 
 	principal := j["principal"].(map[string]interface{})
-	user.Id = string(principal["id"].(float64))
+	user.Id = string(int(principal["id"].(float64)))
 	user.Username = principal["username"].(string)
 	user.Email = principal["email"].(string)
 	user.Name = principal["name"].(string)
