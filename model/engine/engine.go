@@ -49,7 +49,7 @@ func userFromEngineUser(glu *EngineUser) *model.User {
 	user.FirstName = glu.Name
 	user.LastName  = glu.Surname
 	user.Email = glu.Email
-	user.AuthData = strconv.FormatInt(glu.Id, 10)
+	user.AuthData = glu.Id
 	user.AuthService = USER_AUTH_SERVICE_ENGINE
 
 	return user
@@ -65,7 +65,7 @@ func engineUserFromJson(data io.Reader) *EngineUser {
 	}
 
 	principal := j["principal"].(map[string]interface{})
-	user.Id = principal["id"].(int64)
+	user.Id = principal["id"].(string)
 	user.Username = principal["username"].(string)
 	user.Email = principal["email"].(string)
 	user.Name = principal["name"].(string)
