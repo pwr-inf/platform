@@ -9,7 +9,6 @@ import (
 	"github.com/mattermost/platform/einterfaces"
 	"github.com/mattermost/platform/model"
 	"io"
-	"strconv"
 )
 
 const (
