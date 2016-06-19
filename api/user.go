@@ -2071,6 +2071,10 @@ func AuthorizeOAuthUser(service, code, state, redirectUri string) (io.ReadCloser
 		return nil, nil, nil, model.NewLocAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.service.app_error",
 			map[string]interface{}{"Service": service}, err.Error())
 	} else {
+		bodyresp, _ := ioutil.ReadAll(resp.Body)
+		body = string(bodyresp)
+		l4g.Debug("we got user: "+body)
+
 		if result := <-tchan; result.Err != nil {
 			return nil, nil, nil, result.Err
 		} else {
