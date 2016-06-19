@@ -20,11 +20,11 @@ type EngineProvider struct {
 }
 
 type EngineUser struct {
-	Id       int64  `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Name     string `json:"name"`
-	Surname  string `json:"surname"`
+	Id       string
+	Username string
+	Email    string
+	Name     string
+	Surname  string
 }
 
 func StreamToByte(stream io.Reader) []byte {
@@ -74,7 +74,7 @@ func engineUserFromJson(data io.Reader) *EngineUser {
 }
 
 func (glu *EngineUser) IsValid() bool {
-	if glu.Id == 0 {
+	if strconv.Atoi(glu.Id) == 0 {
 		return false
 	}
 
