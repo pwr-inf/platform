@@ -4,6 +4,7 @@
 package oauthengine
 
 import (
+	"bytes"
 	"encoding/json"
 	"github.com/mattermost/platform/einterfaces"
 	"github.com/mattermost/platform/model"
@@ -26,9 +27,10 @@ type EngineUser struct {
 	Surname  string `json:"surname"`
 }
 
-type EngineMessage struct {
-	IsAuthenticated int64 `authenticated`
-	User EngineUser `json:principal`
+func StreamToByte(stream io.Reader) []byte {
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(stream)
+	return buf.Bytes()
 }
 
 func init() {
@@ -53,26 +55,30 @@ func userFromEngineUser(glu *EngineUser) *model.User {
 	return user
 }
 
-func engineMessageFromJson(data io.Reader) *EngineMessage {
-	decoder := json.NewDecoder(data)
-	var glu EngineMessage
-	err := decoder.Decode(&glu)
-	if err == nil {
-		return &glu
-	} else {
+func engineUserFromJson(data io.Reader) *EngineUser {
+	user := &EngineUser{}
+
+	var j map[string]interface{}
+	err := json.Unmarshal(StreamToByte(data), &j)
+	if err != nil {
 		return nil
 	}
+
+	principal := j["principal"].(map[string]interface{})
+	user.Id = principal["id"].(int64)
+	user.Username = principal["username"].(string)
+	user.Email = principal["email"].(string)
+	user.Name = principal["name"].(string)
+	user.Surname = principal["surname"].(string)
+	return user
 }
 
-func (glu *EngineMessage) IsValid() bool {
-	if glu.IsAuthenticated != 1 {
-		return false
-	}
-	if glu.User.Id == 0 {
+func (glu *EngineUser) IsValid() bool {
+	if glu.Id == 0 {
 		return false
 	}
 
-	if len(glu.User.Email) == 0 {
+	if len(glu.Email) == 0 {
 		return false
 	}
 
@@ -88,19 +94,19 @@ func (m *EngineProvider) GetIdentifier() string {
 }
 
 func (m *EngineProvider) GetUserFromJson(data io.Reader) *model.User {
-	glu := engineMessageFromJson(data)
+	glu := engineUserFromJson(data)
 	if glu.IsValid() {
-		return userFromEngineUser(&glu.User)
+		return glu.userFromEngineUser()
 	}
 
 	return &model.User{}
 }
 
 func (m *EngineProvider) GetAuthDataFromJson(data io.Reader) string {
-	glu := engineMessageFromJson(data)
+	glu := engineUserFromJson(data)
 
 	if glu.IsValid() {
-		return glu.User.getAuthData()
+		return glu.getAuthData()
 	}
 
 	return ""
