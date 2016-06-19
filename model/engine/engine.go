@@ -96,7 +96,7 @@ func (m *EngineProvider) GetIdentifier() string {
 func (m *EngineProvider) GetUserFromJson(data io.Reader) *model.User {
 	glu := engineUserFromJson(data)
 	if glu.IsValid() {
-		return glu.userFromEngineUser()
+		return userFromEngineUser(&glu)
 	}
 
 	return &model.User{}
