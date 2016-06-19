@@ -74,9 +74,9 @@ func engineUserFromJson(data io.Reader) *EngineUser {
 }
 
 func (glu *EngineUser) IsValid() bool {
-	if strconv.Atoi(glu.Id) == 0 {
-		return false
-	}
+//	if strconv.Atoi(glu.Id) == 0 {
+//		return false
+//	}
 
 	if len(glu.Email) == 0 {
 		return false
@@ -86,7 +86,7 @@ func (glu *EngineUser) IsValid() bool {
 }
 
 func (glu *EngineUser) getAuthData() string {
-	return strconv.FormatInt(glu.Id, 10)
+	return glu.Id
 }
 
 func (m *EngineProvider) GetIdentifier() string {
