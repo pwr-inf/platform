@@ -130,7 +130,7 @@ func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	protocol := GetProtocol(r)
-	c.setSiteURL(protocol + "://" + r.Host)
+	c.setSiteURL(protocol + "://" + r.Host + "/")
 
 	w.Header().Set(model.HEADER_REQUEST_ID, c.RequestId)
 	w.Header().Set(model.HEADER_VERSION_ID, fmt.Sprintf("%v.%v", model.CurrentVersion, utils.CfgLastModified))
