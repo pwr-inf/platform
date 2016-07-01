@@ -207,6 +207,10 @@
             height: 18px;
             margin-right: 8px;
             width: 18px;
+
+            &.icon-engine{
+                background-image: url('../images/icons/engine.png');
+            }
         }
 
         &.btn-custom-login {

@@ -224,7 +224,7 @@ export default class Login extends React.Component {
                     key='engine'
                     to={'/api/v1/oauth/engine/login?team=' + encodeURIComponent(teamName)}
                 >
-                    <span className='icon'/>
+                    <span className='icon icon-engine'/>
                     <span>
                         <FormattedMessage
                             id='login.engine'
