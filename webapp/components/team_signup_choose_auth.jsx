@@ -43,7 +43,7 @@ export default class ChooseAuthPage extends React.Component {
                         key='engine'
                         href='#'
                         onClick={
-                            function clickGit(e) {
+                            (e) => {
                                 e.preventDefault();
                                 this.props.updatePage('engine');
                             }.bind(this)

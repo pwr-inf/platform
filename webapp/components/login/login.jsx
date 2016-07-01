@@ -221,7 +221,7 @@ export default class Login extends React.Component {
             oauthLogins.push(
                 <Link
                     className='btn btn-custom-login engine'
-                    key='gitlab'
+                    key='engine'
                     to={'/api/v1/oauth/engine/login?team=' + encodeURIComponent(teamName)}
                 >
                     <span className='icon'/>
