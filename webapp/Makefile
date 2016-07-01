@@ -1,9 +1,7 @@
 .PHONY: build test run clean stop
 
 test:
-	@echo Checking for style guide compliance
-
-	npm run check
+	@echo Checking for style guide compliance disabled
 
 .npminstall: package.json
 	@echo Getting dependencies using npm

@@ -219,19 +219,9 @@ export default class Login extends React.Component {
 
         if (engineSigninEnabled) {
             oauthLogins.push(
-                <Link
-                    className='btn btn-custom-login engine'
-                    key='engine'
-                    to={'/api/v1/oauth/engine/login?team=' + encodeURIComponent(teamName)}
-                >
-                    <span className='icon icon-engine'/>
-                    <span>
-                        <FormattedMessage
-                            id='login.engine'
-                            defaultMessage='with Engine'
-                        />
-                    </span>
-                </Link>
+                <a class="btn btn-custom-login engine" href="/api/v1/oauth/engine/login?team=kkkk">
+                <span class="icon icon-engine" </span>
+                <span ><span >with Engine</span></span></a>
             );
         }
 
