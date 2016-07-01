@@ -46,7 +46,7 @@ export default class ChooseAuthPage extends React.Component {
                             (e) => {
                                 e.preventDefault();
                                 this.props.updatePage('engine');
-                            }.bind(this)
+                            }
                         }
                     >
                         <span className='icon'/>
