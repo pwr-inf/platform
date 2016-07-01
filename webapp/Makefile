@@ -6,8 +6,8 @@ test:
 .npminstall: package.json
 	@echo Getting dependencies using npm
 
-	npm install
-	npm install -g webpack
+	npm install --only=dev
+	npm install --only=prod
 	touch $@
 
 build: | .npminstall test
