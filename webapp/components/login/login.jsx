@@ -220,8 +220,8 @@ export default class Login extends React.Component {
         if (engineSigninEnabled) {
             oauthLogins.push(
                 <a class="btn btn-custom-login engine" href="/api/v1/oauth/engine/login?team=kkkk">
-                <span class="icon icon-engine" </span>
-                <span ><span >with Engine</span></span></a>
+                <span class="icon icon-engine"> </span>
+                <span><span >with Engine</span></span></a>
             );
         }
 
