@@ -7,7 +7,7 @@ test:
 	@echo Getting dependencies using npm
 
 	npm install
-
+	npm install -g webpack
 	touch $@
 
 build: | .npminstall test
